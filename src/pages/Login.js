@@ -1,4 +1,5 @@
-import React, { useReducer, useEffect, useRef } from 'react';
+import React, { useReducer, useEffect, useRef, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import { verifyLogin } from './utils';
 
 const initialState = {
@@ -74,6 +75,11 @@ export default function Login() {
 //     }
 //   };
 
+
+    const navigate = useNavigate();
+    const handleOnClick = useCallback(() => navigate('/', {replace: true}), [navigate])
+
+
   useEffect(() => {
     if (isFocused) {
       usernameRef.current.focus();
@@ -126,8 +132,8 @@ export default function Login() {
            
             <input type="checkbox" id="Remember" /> <label for="Remember me">Remember me</label> 
             </div>
-            <button className="submit" type="submit" disabled={isLoading}>
-              {isLoading ? 'Logging In.....' : 'Log In'}
+            <button className="submit" type="submit" onClick={handleOnClick} >
+                Login
             </button>
             <p><a href=''>Non sei registrato? Registrati!</a></p>
             <p><a href=''>Password dimenticata? Clicca qui!</a></p>
